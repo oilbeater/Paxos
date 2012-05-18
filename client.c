@@ -16,8 +16,6 @@ int main()
 	char *data1 = "I receive your reply!\n";
 	int len;
 
-	while(1)
-	{
 	fd = socket(AF_INET, SOCK_STREAM, 0);
 
 	address.sin_family = AF_INET;
@@ -35,13 +33,15 @@ int main()
 		printf("connected\n");
 	}
 
-	write(fd, (void *)data1, strlen(data1));
+	write(fd, (void *)data, strlen(data));
 	printf("sent line:%s",data);
 	len = read(fd,(void *)data2,100);
 	printf("readline:%s",data2);
+	write(fd, (void *)data1, strlen(data1));
+	printf("sent line:%s",data);
 	printf("client exit.\n");
+
 	close(fd);
-	}
 	return 0;
 }
 

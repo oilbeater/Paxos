@@ -8,6 +8,7 @@ int main()
 	int fd;
 	int address_len;
 	struct sockaddr_in address;
+	int listenfd;
 
 	fd = socket(AF_INET, SOCK_STREAM ,0);
 
@@ -17,7 +18,7 @@ int main()
 	address_len = sizeof(address);
 	bind(fd, (struct sockaddr *)&address, address_len);
 
-	listen(fd,100);
+	listenfd = listen(fd,100);
 
 	while(1)
 	{
@@ -25,19 +26,23 @@ int main()
 		int len;
 		int client_sockfd;
 		char *data = "Server to Client String!\n";
-		char data2[100];
 
-		printf("waiting...");
+		printf("waiting...\n");
 		fflush(stdout);
 
 		len = sizeof(client_address);
 		client_sockfd = accept(fd,(struct sockaddr *)&client_address, &len);
 
+		while(1)
+		{
+		char data2[100];
+		memset((void*)data2,0,100);
 		read(client_sockfd, (void *)data2, 100);
 		printf("Server read line:%s",data2);
 
 		write(client_sockfd, (void *)data, strlen(data));
-		printf("Server send lin:%s",data);
+		printf("Server send line:%s",data);
+		}
 	}
 	return 0;
 }
