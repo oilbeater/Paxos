@@ -37,15 +37,23 @@ int main()
 	while(1)
 	{
 		memset((void*)message,0,100);
-		printf("Please type something\n");
+		printf("Please type promise id\n");
 		scanf("%s",message);
 		write(fd, (void *)message, strlen(message));
 		printf("sent line:%s\n",message);
 		len = read(fd,(void *)data2,100);
 		printf("readline:%s\n",data2);
+		if(data2[0]=='1')
+		{
+			printf("Please type the id and message\n");
+			memset((void*)message,0,100);
+			scanf("%s",message);
+			write(fd, (void *)message, strlen(message));
+			printf("sent line:%s\n",message);
+		}
+		else
+			continue;
 	}
-	write(fd, (void *)data1, strlen(data1));
-	printf("sent line:%s\n",data);
 	printf("client exit.\n");
 
 	close(fd);
