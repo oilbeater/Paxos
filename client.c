@@ -33,12 +33,19 @@ int main()
 		printf("connected\n");
 	}
 
-	write(fd, (void *)data, strlen(data));
-	printf("sent line:%s",data);
-	len = read(fd,(void *)data2,100);
-	printf("readline:%s",data2);
+	char message[100];
+	while(1)
+	{
+		memset((void*)message,0,100);
+		printf("Please type something\n");
+		scanf("%s",message);
+		write(fd, (void *)message, strlen(message));
+		printf("sent line:%s\n",message);
+		len = read(fd,(void *)data2,100);
+		printf("readline:%s\n",data2);
+	}
 	write(fd, (void *)data1, strlen(data1));
-	printf("sent line:%s",data);
+	printf("sent line:%s\n",data);
 	printf("client exit.\n");
 
 	close(fd);

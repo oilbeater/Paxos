@@ -38,10 +38,10 @@ int main()
 		char data2[100];
 		memset((void*)data2,0,100);
 		read(client_sockfd, (void *)data2, 100);
-		printf("Server read line:%s",data2);
+		printf("Server read line:%s\n",data2);
 
 		write(client_sockfd, (void *)data, strlen(data));
-		printf("Server send line:%s",data);
+		printf("Server send line:%s\n",data);
 		}
 	}
 	return 0;
