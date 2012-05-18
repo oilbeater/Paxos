@@ -17,7 +17,7 @@ int main()
 	address_len = sizeof(address);
 	bind(fd, (struct sockaddr *)&address, address_len);
 
-	listen(fd,5);
+	listen(fd,100);
 
 	while(1)
 	{
