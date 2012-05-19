@@ -8,4 +8,4 @@ server: server.c
 client: client.c
 		gcc client.c -o client
 clean: 
-		rm server client learner
+		rm accepter1 proposer learner1 learner2
