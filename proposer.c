@@ -26,7 +26,6 @@ int main()
 	if(rtval == -1) 
 	{
 		printf("connection failed\n");
-		exit(1);
 	}
 	else
 	{
@@ -48,13 +47,32 @@ int main()
 	if(rtval1 == -1) 
 	{
 		printf("connection failed\n");
-		exit(1);
 	}
 	else
 	{
 		printf("connected\n");
 	}
+	int fd2;
+	struct sockaddr_in address2;
+	int address_len2;
+	int rtval2;
+	int len2;
 
+	fd2 = socket(AF_INET, SOCK_STREAM, 0);
+
+	address2.sin_family = AF_INET;
+	address2.sin_addr.s_addr = inet_addr("127.0.0.1");
+	address2.sin_port = htons(8889);
+	address_len2 = sizeof(address2);
+	rtval2 = connect(fd2, (struct sockaddr *)&address2, address_len2);
+	if(rtval2 == -1) 
+	{
+		printf("connection failed\n");
+	}
+	else
+	{
+		printf("connected\n");
+	}
 	char message[100];
 	while(1)
 	{
@@ -78,7 +96,16 @@ int main()
 			printf("readline:%s\n",data2);
 			if(data2[0]=='1')
 			{
-				write(fd1,(void*)message, strlen(message));
+				if(fork()==0)
+				{
+					write(fd1,(void*)message, strlen(message));
+					exit(0);
+				}
+				if(fork()==0)
+				{
+					write(fd2,(void*)message, strlen(message));
+					exit(0);
+				}
 			}
 		}
 		else
