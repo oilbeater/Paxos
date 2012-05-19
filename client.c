@@ -4,7 +4,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <pthread.h>
 int main()
 {
 	int fd;
@@ -41,6 +41,7 @@ int main()
 		scanf("%s",message);
 		write(fd, (void *)message, strlen(message));
 		printf("sent line:%s\n",message);
+		memset((void *)data2,0,100);
 		len = read(fd,(void *)data2,100);
 		printf("readline:%s\n",data2);
 		if(data2[0]=='1')
@@ -50,6 +51,9 @@ int main()
 			scanf("%s",message);
 			write(fd, (void *)message, strlen(message));
 			printf("sent line:%s\n",message);
+			memset((void *)data2,0,100);
+			len = read(fd,(void *)data2,100);
+			printf("readline:%s\n",data2);
 		}
 		else
 			continue;

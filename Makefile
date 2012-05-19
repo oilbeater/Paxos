@@ -1,8 +1,8 @@
 prog: server.c client.c
 		gcc client.c -o client
-		gcc server.c -o server
+		gcc -lpthread -o server server.c
 server: server.c
-		gcc server.c -o server
+		gcc -lpthread -o server server.c
 client: client.c
 		gcc client.c -o client
 clean: 
