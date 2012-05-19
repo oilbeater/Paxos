@@ -1,0 +1,4 @@
+这是一个简单的Paxos的C代码实现。
+Paxos是一个解决分布式系统一致性问题的协议，协议的具体内容可以参考
+http://en.wikipedia.org/wiki/Paxos_(computer_science)。
+目前版本只实现了单accepter多proposer的部分，还没有加入多learner和多accepter进一步的实现将会在近期完成。
