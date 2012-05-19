@@ -1,11 +1,9 @@
-prog: accepter1.c proposer.c learner1.c learner2.c
+prog: accepter1.c accepter2.c accepter3.c proposer.c learner1.c learner2.c
 		gcc proposer.c -o proposer
 		gcc learner1.c -o learner1
 		gcc learner2.c -o learner2
 		gcc -lpthread -o accepter1 accepter1.c
-server: server.c
-		gcc -lpthread -o server server.c
-client: client.c
-		gcc client.c -o client
+		gcc -lpthread -o accepter2 accepter2.c
+		gcc -lpthread -o accepter3 accepter3.c
 clean: 
-		rm accepter1 proposer learner1 learner2
+		rm accepter1 accepter2 accepter3 proposer learner1 learner2

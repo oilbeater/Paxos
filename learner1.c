@@ -40,6 +40,11 @@ int main()
 				char data2[100];
 				memset((void *)data2,0,100);
 				read(client_sockfd, (void *)data2,100);
+				if(strlen(data2)==0)
+				{
+					close(client_sockfd);
+					exit(0);
+				}
 				printf("Server read line:%s\n",data2);
 			}	
 			close(client_sockfd);
