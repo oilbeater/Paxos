@@ -14,6 +14,7 @@ jmp_buf Jump_Buffer;
 #define throw longjmp(Jump_Buffer,1)
 
 char *confirm_promise = "1 Promise Confirmed!";
+char *confirm_send = "1 Send Confirm!";
 char *reject_promise = "0 Promise Rejected!";
 char *reject_send = "0 Send Reject";
 char *reject_format = "0 Format Wrong";
@@ -67,7 +68,7 @@ void* do_loop(void *clientdata)
 				if(data2[2]-'0'==sn)
 				{
 					printf("Server confirm send\n");
-					write(client_sockfd, (void *)data, strlen(data));
+					write(client_sockfd, (void *)confirm_send, strlen(data));
 				}
 				else
 				{

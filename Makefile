@@ -7,4 +7,4 @@ server: server.c
 client: client.c
 		gcc client.c -o client
 clean: 
-		rm server client
+		rm server client learner

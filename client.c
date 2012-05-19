@@ -32,6 +32,28 @@ int main()
 	{
 		printf("connected\n");
 	}
+	int fd1;
+	struct sockaddr_in address1;
+	int address_len1;
+	int rtval1;
+	int len1;
+
+	fd1 = socket(AF_INET, SOCK_STREAM, 0);
+
+	address1.sin_family = AF_INET;
+	address1.sin_addr.s_addr = inet_addr("127.0.0.1");
+	address1.sin_port = htons(8888);
+	address_len1 = sizeof(address1);
+	rtval1 = connect(fd1, (struct sockaddr *)&address1, address_len1);
+	if(rtval1 == -1) 
+	{
+		printf("connection failed\n");
+		exit(1);
+	}
+	else
+	{
+		printf("connected\n");
+	}
 
 	char message[100];
 	while(1)
@@ -54,6 +76,10 @@ int main()
 			memset((void *)data2,0,100);
 			len = read(fd,(void *)data2,100);
 			printf("readline:%s\n",data2);
+			if(data2[0]=='1')
+			{
+				write(fd1,(void*)message, strlen(message));
+			}
 		}
 		else
 			continue;
