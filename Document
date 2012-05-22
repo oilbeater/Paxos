@@ -1,0 +1,49 @@
+内容：
+1.完成的功能
+2.编译安装
+3.运行演示步骤
+4.代码注释及说明
+5.需要改进的地方
+-----------------------------------------------------------------------------
+***      完成的功能                                     ***
+-----------------------------------------------------------------------------
+代码实现了基本的Paxos协议，本代码支持2个learner，3个accepter，和多个proposer，可以在Acceptor failure，redundant Learner failure，Proposer failure，dueling Proposers情况下正常运行，不会出现问题。
+-----------------------------------------------------------------------------
+***      编译安装                                    ***
+-----------------------------------------------------------------------------
+解压缩文件，命令行下运行make，完成编译。
+-----------------------------------------------------------------------------
+***      运行演示                                    ***
+-----------------------------------------------------------------------------
+1）在多个窗口分别按顺序运行./learner1，./learner2,./accepter1,./accepter2,./accepter3,./proposer,./proposer
+2)消息编码格式：
+第一位为消息类型，0表示申请promise id，1表示申请发送消息。
+第三位为序号位可以从0到9，第三位后为发送消息。
+3）正常情况演示：
+    （1）proposer发送0_1，表示申请发送，promise id 为1
+    （2）proposer收到accepter确认，发送1_1message表示以1为序号发送message
+    （3）learner1和learner2收到message
+4）Accepter failure演示
+    （1）proposer发送0_2，表示申请发送，promise id 为2
+    （2）在任意一个accepter中用Ctrl+c结束进程
+    （3）proposer收到accepter确认，发送1_2message表示以2为序号发送message
+    （4）learner1和learner2收到message
+5）redundant Learner failure演示
+    （1）proposer发送0_3，表示申请发送，promise id 为3
+    （2）在learner1中用Ctrl+c结束进程
+    （3）proposer收到accepter确认，发送1_3message表示以3为序号发送message
+    （4）learner2收到message
+6）dueling Proposers
+    （1）在一个proposer中发送0_4,表示申请发送，promise id 为4 
+    （2）在另一个proposer中发送0_5,表示申请发送，promise id 为5 
+    （3）第一个proposer收到accepter确认，发送1_4message1表示以4为序号发送message1
+    （3）第二个proposer收到accepter确认，发送1_5message2表示以5为序号发送message2
+    （4）learner1和learn2收到message2
+7）failure of proposer
+    （1）在一个窗口的proposer中用Ctrl+c结束进程
+    （2）proposer发送0_6，表示申请发送，promise id 为6
+    （3）proposer收到accepter确认，发送1_6message表示以6为序号发送message
+    （4）learner1和learner2收到message
+-----------------------------------------------------------------------------
+***      代码注释及说明                                   ***
+-----------------------------------------------------------------------------
