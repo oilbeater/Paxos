@@ -115,50 +115,6 @@ int main()
 		int ret;
 		pthread_t p_thread;
 		ret=pthread_create(&p_thread,NULL,do_loop,(void *) &client_sockfd);
-		/*int pid;
-		if(pid = fork() == 0)
-		{
-			close(listenfd);
-			while(1)
-			{
-			char data2[100];
-			memset((void*)data2,0,100);
-			read(client_sockfd, (void *)data2, 100);
-			printf("Server read line:%s\n",data2);
-			if(data2[0]=='0')
-			{
-				if(check_promise(data2[2],&sn))
-				{
-					write(client_sockfd, (void *)confirm_promise, strlen(confirm_promise));
-					printf("Server send line:%s\n",confirm_promise);
-				}
-				else
-				{
-					write(client_sockfd, (void *)reject_promise, strlen(reject_promise));
-					printf("Server send line:%s\n",reject_promise);
-				}
-			}
-			else
-				if(data2[0]=='1')
-				{
-					if(data[2]-'0'==sn)
-					{
-						write(client_sockfd, (void *)data, strlen(data));
-					}
-					else
-					{
-						write(client_sockfd, (void *)reject_promise, strlen(reject_promise));
-					}
-				}
-				else
-				{
-					write(client_sockfd, (void *)reject_promise, strlen(reject_promise));
-				}
-
-			}
-			close(client_sockfd);
-			exit(0);
-		}*/
 	}
 	return 0;
 }
