@@ -1,9 +1,9 @@
 这是一个简单的Paxos的C代码实现。
-Paxos是一个解决分布式系统一致性问题的协议，协议的具体内容可以参考
+Paxos是一个解决分布式系统一致性问题的协议，协议的具体内容可以参考:
 http://en.wikipedia.org/wiki/Paxos_(computer_science)
 本版本目前完成了最基本的paxos协议的模拟，可运行多个proposer，三个accepter和两个learner，可以演示上面链接中的四种failure。但是还有许多需要完善的地方。
 详细的信息在Document中。
-Need to do
+Need to do:
 1）accepter和learner的断口号都是硬编码进去的，所以数量目前也都是固定的，理想情况应该是指定一个配置文件来动态指定IP地址和端口号，但是我觉得用C语言这个没有正则表达式的语言解析文本实在是太麻烦了，交作业要紧就先没做。
 2）proposer中对socket的初始化是每个单独进行的，代码重复量十分大，可以考虑建立一个socket_fd数组利用循环的方式给socket赋值并进行连接，但是我又懒了。
 3）由于每次读socket都是新建立了一个进程来读取所以把一些网络错误给屏蔽了，但是也就无法检测出哪里出错了。
